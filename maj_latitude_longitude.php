@@ -35,7 +35,15 @@ if ($result === false) {
 
     // l'appel de l'api nominatim génère l'erreur "failed to open stream: HTTP request failed! HTTP/1.1 403 Forbidden" si on ne passe pas d'adresse mail en paramètre...
     // $json = file_get_contents("https://nominatim.openstreetmap.org/search?q=".$address_param."&format=json&limit=1");
-    $json = file_get_contents("https://nominatim.openstreetmap.org/search?q=".$address_param."&format=json&limit=1&email=magali_schimpf@yahoo.fr");
+	  
+    // Version "simple" avec le paramètre q (query)  
+    // $json = file_get_contents("https://nominatim.openstreetmap.org/search?q=".$address_param."&format=json&limit=1&email=magali_schimpf@yahoo.fr");
+	  
+    // Version "structured" avec les paramètres street, city et postalcode
+    $address = str_replace(" ", "+", $address);
+    $city = str_replace(" ", "+", $city);
+    $postal_code = str_replace(" ", "+", $postal_code);
+    $json = file_get_contents("https://nominatim.openstreetmap.org/search?street=".$address."&city=".$city."&postalcode=".$postal_code."&format=json&limit=1&email=magali_schimpf@yahoo.fr"); // Lit tout un fichier dans une chaîne
     $json = json_decode($json);
     
     if(count($json)>0){
