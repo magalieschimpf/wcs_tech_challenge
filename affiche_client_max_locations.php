@@ -29,11 +29,11 @@ if ($result === false) {
   if($row = mysqli_fetch_row($result_max_locations)){
   	$first_name    = $row[0];
   	$last_name     = $row[1];
-    $address       = $row[2];
-    $city          = $row[3];
-    $postal_code   = $row[4];
-    $latitude      = $row[5];
-    $longitude     = $row[6];
+    	$address       = $row[2];
+    	$city          = $row[3];
+    	$postal_code   = $row[4];
+    	$latitude      = rtrim($row[5], '0');
+    	$longitude     = rtrim($row[6], '0');
   	$max_locations = $row[7];
 ?>
 <!DOCTYPE html>
