@@ -16,8 +16,7 @@ if ($result === false) {
 }else{
   // Cette requête affiche le 1er client trouvé parmi ceux qui ont fait le plus de locations.
   // En cas d'égalité, seul le 1er client trouvé sera affiché...  
-  $requete_max_locations = "select first_name, last_name, address, city, postal_code, latitude, longitude, nb_locations  from ";
-  $requete_max_locations .= "(select first_name, last_name, address, city, postal_code, latitude, longitude, count(1) as nb_locations from customer join rental on customer.customer_id = rental.customer_id join address on customer.address_id = address.address_id group by customer.customer_id order by nb_locations desc limit 1) as results_locations ";
+  $requete_max_locations = "select first_name, last_name, address, city, postal_code, latitude, longitude, count(1) as nb_locations from customer join rental on customer.customer_id = rental.customer_id join address on customer.address_id = address.address_id group by customer.customer_id order by nb_locations desc limit 1 ";
 
   // autre requête ramenant le même résultat
   /*
@@ -30,11 +29,11 @@ if ($result === false) {
   if($row = mysqli_fetch_row($result_max_locations)){
   	$first_name    = $row[0];
   	$last_name     = $row[1];
-    	$address       = $row[2];
-    	$city          = $row[3];
-    	$postal_code   = $row[4];
-    	$latitude      = $row[5];
-    	$longitude     = $row[6];
+    $address       = $row[2];
+    $city          = $row[3];
+    $postal_code   = $row[4];
+    $latitude      = $row[5];
+    $longitude     = $row[6];
   	$max_locations = $row[7];
 ?>
 <!DOCTYPE html>
